@@ -131,7 +131,7 @@ export function PremiumSection({ items, onAddToCart, companyId, companyName }: P
                         onValueChange={(value) =>
                           setSelectedLanguages({
                             ...selectedLanguages,
-                            [item.id]: value,
+                            [item.id]: value || "english",
                           })
                         }
                       >

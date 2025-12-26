@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useState } from "react";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,14 +11,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface InvestigationRequestModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const countries = [
@@ -32,7 +32,7 @@ const countries = [
   { value: "jordan", label: "Jordan" },
   { value: "lebanon", label: "Lebanon" },
   { value: "morocco", label: "Morocco" },
-]
+];
 
 const serviceOptions = [
   { id: "cr_doc", label: "Commercial Registration Document" },
@@ -43,13 +43,13 @@ const serviceOptions = [
   { id: "credit", label: "Credit Report" },
   { id: "bankruptcy", label: "Bankruptcy Records" },
   { id: "directors", label: "Directors Information" },
-]
+];
 
 export function InvestigationRequestModal({
   isOpen,
   onClose,
 }: InvestigationRequestModalProps) {
-  const [selectedServices, setSelectedServices] = useState<string[]>([])
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
     companyCountry: "",
@@ -61,26 +61,26 @@ export function InvestigationRequestModal({
     contactPerson: "",
     comments: "",
     clientReference: "",
-  })
+  });
 
   const handleServiceToggle = (serviceId: string) => {
     setSelectedServices((prev) =>
       prev.includes(serviceId)
         ? prev.filter((id) => id !== serviceId)
         : [...prev, serviceId]
-    )
-  }
+    );
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission
     alert(
       "Thank you for your request! Your order will be assessed and we will send you an email with the full cost, turnaround time, and payment link. After successful payment, we will send you the requested documents via email within the specified turnaround time."
-    )
-    onClose()
-  }
+    );
+    onClose();
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -127,11 +127,11 @@ export function InvestigationRequestModal({
                 <Select
                   value={formData.companyCountry}
                   onValueChange={(value) =>
-                    setFormData({ ...formData, companyCountry: value })
+                    setFormData({ ...formData, companyCountry: value || "" })
                   }
                 >
                   <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="None Selected" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -325,6 +325,5 @@ export function InvestigationRequestModal({
         </form>
       </div>
     </div>
-  )
+  );
 }
-
